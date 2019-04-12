@@ -8,15 +8,15 @@ The process is all about drawing polylines along the measured installations. Pol
 Drawn polyline lengths are then exported to .sdf format which can be opened in MS Excel. Then you can join the data from multiple drawings and get pivot table report of all the measured installations.
 
 ### What is the difference
-##### Ease of use
+#### Ease of use
 The main advantage of this method is the ease of use. You don't waste time on creating layers, copying and pasting layer names etc.
-##### No monotony and errors
+#### No monotony and errors
 The script calculates lengths so it eliminates possibility of human error. It also helps in case of documentation revisions - you change the revised part of the drawing only and export the data again.
-##### Keeping it clean
+#### Keeping it clean
 By using this add-on in your team you can easily keep layer naming scheme and order, making it easy to take over someone elses measurements. 
 
 ### How to use
-* download ObmiarPW.dll located in Obmiar/bin/Debug
+* download ObmiarPW.dll (will be available for download soon with corresponding Excel template files)
 * open AutoCAD and use `NETLOAD` command to load the .dll file
 * use `APPLOAD` command to load dependencies (listed in section below)
 * now you can use `OBMIAR` command to show the add-on palette
@@ -35,10 +35,10 @@ By using this add-on in your team you can easily keep layer naming scheme and or
 * If you use object snap while measuring be careful with the Z axis (especially on ventilations drawings). AutoCAD can snap one end of polyline on different Z-coordinate than the other end. It looks like there is no problem from the top view but results in wrong length calculation.
 
 ### Dependencies
-LOS.lsp [https://www.theswamp.org/index.php?topic=53844.0](https://www.theswamp.org/index.php?topic=53844.0)
-TLEN.lsp [http://www.lee-mac.com/totallengthandarea.html](http://www.lee-mac.com/totallengthandarea.html)
-ADDLEN.vlx [https://www.cadforum.cz/cadforum_en/download.asp?fileID=1013](https://www.cadforum.cz/cadforum_en/download.asp?fileID=1013)
+* LOS.lsp [https://www.theswamp.org/index.php?topic=53844.0](https://www.theswamp.org/index.php?topic=53844.0)
+* TLEN.lsp [http://www.lee-mac.com/totallengthandarea.html](http://www.lee-mac.com/totallengthandarea.html)
+* ADDLEN.vlx [https://www.cadforum.cz/cadforum_en/download.asp?fileID=1013](https://www.cadforum.cz/cadforum_en/download.asp?fileID=1013)
 
 ### Used and modified code
-Creating a docking palette: [https://forums.autodesk.com/autodesk/attachments/autodesk/152/26712/1/CP205-2_Mike_Tuersley.pdf](https://forums.autodesk.com/autodesk/attachments/autodesk/152/26712/1/CP205-2_Mike_Tuersley.pdf)
-Layer creation and assignment: [https://through-the-interface.typepad.com](https://through-the-interface.typepad.com)
+* Creating a docking palette: [https://forums.autodesk.com/autodesk/attachments/autodesk/152/26712/1/CP205-2_Mike_Tuersley.pdf](https://forums.autodesk.com/autodesk/attachments/autodesk/152/26712/1/CP205-2_Mike_Tuersley.pdf)
+* Layer creation and assignment: [https://through-the-interface.typepad.com](https://through-the-interface.typepad.com)
