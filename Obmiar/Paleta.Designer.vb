@@ -32,6 +32,7 @@ Partial Class Paleta
         Me.ChkBoxPlaszcz = New System.Windows.Forms.CheckBox()
         Me.ChkBoxKabel = New System.Windows.Forms.CheckBox()
         Me.GrpMat = New System.Windows.Forms.GroupBox()
+        Me.txtMat = New System.Windows.Forms.TextBox()
         Me.chkBoxMaterial = New System.Windows.Forms.CheckBox()
         Me.BtnDraw = New System.Windows.Forms.Button()
         Me.BtnCancel = New System.Windows.Forms.Button()
@@ -73,7 +74,6 @@ Partial Class Paleta
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.txtMat = New System.Windows.Forms.TextBox()
         Me.GrpInst.SuspendLayout()
         Me.GrpInne.SuspendLayout()
         Me.GrpMat.SuspendLayout()
@@ -129,7 +129,7 @@ Partial Class Paleta
         'ChkBoxInne
         '
         Me.ChkBoxInne.AutoSize = True
-        Me.ChkBoxInne.Location = New System.Drawing.Point(103, 44)
+        Me.ChkBoxInne.Location = New System.Drawing.Point(104, 44)
         Me.ChkBoxInne.Name = "ChkBoxInne"
         Me.ChkBoxInne.Size = New System.Drawing.Size(15, 14)
         Me.ChkBoxInne.TabIndex = 4
@@ -138,7 +138,7 @@ Partial Class Paleta
         'TxtBoxInne
         '
         Me.TxtBoxInne.Enabled = False
-        Me.TxtBoxInne.Location = New System.Drawing.Point(122, 40)
+        Me.TxtBoxInne.Location = New System.Drawing.Point(123, 40)
         Me.TxtBoxInne.Name = "TxtBoxInne"
         Me.TxtBoxInne.Size = New System.Drawing.Size(57, 20)
         Me.TxtBoxInne.TabIndex = 3
@@ -184,6 +184,14 @@ Partial Class Paleta
         Me.GrpMat.TabIndex = 14
         Me.GrpMat.TabStop = False
         Me.GrpMat.Text = "Materiał:"
+        '
+        'txtMat
+        '
+        Me.txtMat.Enabled = False
+        Me.txtMat.Location = New System.Drawing.Point(7, 19)
+        Me.txtMat.Name = "txtMat"
+        Me.txtMat.Size = New System.Drawing.Size(172, 20)
+        Me.txtMat.TabIndex = 22
         '
         'chkBoxMaterial
         '
@@ -623,14 +631,6 @@ Partial Class Paleta
         Me.Button1.TabIndex = 15
         Me.Button1.Text = "Eksportuj"
         Me.Button1.UseVisualStyleBackColor = True
-        '
-        'txtMat
-        '
-        Me.txtMat.Enabled = False
-        Me.txtMat.Location = New System.Drawing.Point(7, 19)
-        Me.txtMat.Name = "txtMat"
-        Me.txtMat.Size = New System.Drawing.Size(172, 20)
-        Me.txtMat.TabIndex = 22
         '
         'Paleta
         '

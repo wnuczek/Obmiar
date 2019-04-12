@@ -193,6 +193,7 @@ Public Class Paleta
                     ' ListBoxWymA.SelectedIndex = actualListboxWymA
                     TABsrDN = ArrayAdd(TABsrDN, txtInnaSred.Text)
                     sred = txtInnaSred.Text
+                    txtInnaSred.Text = "Inna średnica"
 
                 ElseIf rbtnFi.Checked = True Then
 
@@ -200,6 +201,7 @@ Public Class Paleta
                     ' ListBoxWymA.SelectedIndex = actualListboxWymA
                     TABsrFi = ArrayAdd(TABsrFi, txtInnaSred.Text)
                     sred = txtInnaSred.Text
+                    txtInnaSred.Text = "Inna średnica"
 
                 End If
 

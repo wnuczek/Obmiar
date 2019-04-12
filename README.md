@@ -5,10 +5,15 @@ The idea behind this project is to aid the process of measuring quantities of ve
 
 ### What it does?
 The process is all about drawing polylines along the measured installations. Polylines are assigned to automatically created layers which names contain needed info (system name, material, diameter, insulation details etc.)
-Drawn polylines are then exported to .sdf format which can be opened in MS Excel. Then you can join the data from multiple drawings and get Pivot Table report of all the measured installations.
+Drawn polyline lengths are then exported to .sdf format which can be opened in MS Excel. Then you can join the data from multiple drawings and get pivot table report of all the measured installations.
 
 ### What is the difference
-The main advantage of this method is the ease of use. You can create properly named layers with almost no effort. The script calculates lengths so it eliminates possibility of human error. It also helps in case of documentation revisions - you change the revised part of the drawing only and export the data again.
+##### Ease of use
+The main advantage of this method is the ease of use. You don't waste time on creating layers, copying and pasting layer names etc.
+##### No monotony and errors
+The script calculates lengths so it eliminates possibility of human error. It also helps in case of documentation revisions - you change the revised part of the drawing only and export the data again.
+##### Keeping it clean
+By using this add-on in your team you can easily keep layer naming scheme and order, making it easy to take over someone elses measurements. 
 
 ### How to use
 * download ObmiarPW.dll located in Obmiar/bin/Debug
