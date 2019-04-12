@@ -11,6 +11,14 @@ Drawn polylines are then exported to .sdf format which can be opened in MS Excel
 ### What is the difference
 The main advantage of this method is the ease of use. You can create properly named layers with almost no effort. The script calculates lengths so it eliminates possibility of human error. It also helps in case of documentation revisions - you change the revised part of the drawing only and export the data again.
 
+### How to use
+* download ObmiarPW.dll located in AutoCAD_test/bin/Debug
+* open AutoCAD and use NETLOAD command to load the .dll file
+* use APPLOAD command to load dependencies (listed in section below)
+* now you can use OBMIAR command to show the add-on palette
+
+![alt text](https://pawelwnuk.pl/images/BoQ1.png "Obmiar Add-on Interface")
+
 ### TO-DO and ideas
 * color grade lines based on diameter of pipe
 * draw measured polylines with corresponding system name (line style)
