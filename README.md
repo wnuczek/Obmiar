@@ -1,7 +1,6 @@
-# Obmiar
-## AutoCAD addon helping with getting ducts and pipes quantities from drawings
+# Obmiar - AutoCAD addon helping with getting ducts and pipes quantities from drawings
 
-###What is this?
+### What is this?
 The idea behind this project is to aid the process of measuring quantities of ventilation ducts and all kinds of pipes. 
 
 ### What it does?
@@ -22,6 +21,8 @@ The main advantage of this method is the ease of use. You can create properly na
 ### TO-DO and ideas
 * color grade lines based on diameter of pipe
 * draw measured polylines with corresponding system name (line style)
+* multilanguage version
+* better screen space use
 * ...
 
 ### Caveats 
@@ -30,9 +31,12 @@ The main advantage of this method is the ease of use. You can create properly na
 
 ### Dependencies
 LOS.lsp [https://www.theswamp.org/index.php?topic=53844.0](https://www.theswamp.org/index.php?topic=53844.0)
+
 TLEN.lsp [http://www.lee-mac.com/totallengthandarea.html](http://www.lee-mac.com/totallengthandarea.html)
+
 ADDLEN.vlx [https://www.cadforum.cz/cadforum_en/download.asp?fileID=1013](https://www.cadforum.cz/cadforum_en/download.asp?fileID=1013)
 
 ### Used and modified code
 Creating a docking palette: [https://forums.autodesk.com/autodesk/attachments/autodesk/152/26712/1/CP205-2_Mike_Tuersley.pdf](https://forums.autodesk.com/autodesk/attachments/autodesk/152/26712/1/CP205-2_Mike_Tuersley.pdf)
+
 Layer creation and assignment: [https://through-the-interface.typepad.com](https://through-the-interface.typepad.com)
