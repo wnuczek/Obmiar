@@ -24,6 +24,10 @@ Public Class Paleta
     Public Shared actualListboxWymA As Integer
     Public Shared actualListboxWymB As Integer
 
+    Public Shared old_atrVent As String
+
+    Public Shared blanks() As String = {wymA, wymB, sredVent}
+
 
     'TYPOWE WYMIARY KANAŁÓW////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Public Shared TABwymA() As String = {"200", "250", "300", "315", "350", "400", "500", "600", "700", "800", "1000", "1200", "1500", "2000", "2500"}
@@ -74,7 +78,7 @@ Public Class Paleta
     Dim instHC() As String = {"CO", "CT", "CT AHU", "WL", "WL AHU"}
 
     Private Sub Paleta_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        MsgBox("Narzędzie obmiarowe - © 2016-2018 Paweł Wnuk" & vbNewLine & "(pawelwnuk.pl, mail@pawelwnuk.pl)")
+        MsgBox("Narzędzie obmiarowe - © 2016-2019 Paweł Wnuk" & vbNewLine & "(pawelwnuk.pl, mail@pawelwnuk.pl)")
     End Sub
 
     'WYPEŁNIANIE LISTY Z PLIKU TXT///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -114,50 +118,9 @@ Public Class Paleta
         inst = rInst.Text
     End Sub
 
-    Private Sub rInst_Click(sender As Object, e As EventArgs) Handles rInst.Click
-        If rInst.Text = "Nazwa instalacji" Then
-            rInst.Clear()
-        End If
-    End Sub
+
 
     'MATERIAŁY/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    Private Sub ChangeDiameter()
-        If RBtnStal.Checked = True Or RBtnStalNierdz.Checked = True Or RBtnZeliwo.Checked = True Then
-            rbtnDN.Checked = True
-        Else
-            rbtnFi.Checked = True
-        End If
-    End Sub
-
-    Private Sub RBtnStal_CheckedChanged(sender As Object, e As EventArgs) Handles RBtnStal.CheckedChanged
-        mat = "stal"
-        ChangeDiameter()
-    End Sub
-
-    Private Sub RBtnPP_CheckedChanged(sender As Object, e As EventArgs) Handles RBtnPP.CheckedChanged
-        mat = "PP"
-        ChangeDiameter()
-    End Sub
-
-    Private Sub RBtnStalNierdz_CheckedChanged(sender As Object, e As EventArgs) Handles RBtnStalNierdz.CheckedChanged
-        mat = "stal.nierdz"
-        ChangeDiameter()
-    End Sub
-
-    Private Sub RBtnZeliwo_CheckedChanged(sender As Object, e As EventArgs) Handles RBtnZeliwo.CheckedChanged
-        mat = "zeliwo"
-        ChangeDiameter()
-    End Sub
-
-    Private Sub RBtnPVC_CheckedChanged(sender As Object, e As EventArgs) Handles RBtnPVC.CheckedChanged
-        mat = "PVC"
-        ChangeDiameter()
-    End Sub
-
-    Private Sub RBtnHDPE_CheckedChanged(sender As Object, e As EventArgs) Handles RBtnHDPE.CheckedChanged
-        mat = "HDPE"
-        ChangeDiameter()
-    End Sub
 
     'ATRYBUTY////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Private Sub ChkBoxKabel_CheckedChanged(sender As Object, e As EventArgs) Handles ChkBoxKabel.CheckedChanged
@@ -187,16 +150,18 @@ Public Class Paleta
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles ChkBoxInne.CheckedChanged
         If ChkBoxInne.Checked = True Then
             TxtBoxInne.Enabled = True
+            atr(3) = TxtBoxInne.Text
         Else
             TxtBoxInne.Enabled = False
             TxtBoxInne.Text = "Inne"
+            atr(3) = ""
         End If
     End Sub
 
 
 
     Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TxtBoxInne.TextChanged
-        atr(3) = txtWymA.Text
+        atr(3) = TxtBoxInne.Text
     End Sub
 
     Private Sub txtboxInne_Click(sender As Object, e As EventArgs) Handles TxtBoxInne.Click
@@ -214,7 +179,7 @@ Public Class Paleta
         'KARTA RURY////////////////////////////////////////
         If TabControl1.SelectedTab Is TabPage1 Then
 
-            If rInst.Text = "Nazwa instalacji" Or rInst.Text = "" Then
+            If rInst.Text = "" Then
                 MsgBox("Nie podano nazwy instalacji")
             End If
 
@@ -227,17 +192,22 @@ Public Class Paleta
                     ListBoxFill(ListBoxSred, ArrayAdd(TABsrDN, txtInnaSred.Text))
                     ' ListBoxWymA.SelectedIndex = actualListboxWymA
                     TABsrDN = ArrayAdd(TABsrDN, txtInnaSred.Text)
+                    sred = txtInnaSred.Text
 
                 ElseIf rbtnFi.Checked = True Then
 
                     ListBoxFill(ListBoxSred, ArrayAdd(TABsrFi, txtInnaSred.Text))
                     ' ListBoxWymA.SelectedIndex = actualListboxWymA
                     TABsrFi = ArrayAdd(TABsrFi, txtInnaSred.Text)
+                    sred = txtInnaSred.Text
 
                 End If
 
             End If
 
+            If ChkBoxInne.Checked = False Then
+                atr(3) = ""
+            End If
 
             Dim atrs As String = Join(atr, "_")
             CreateLayerName(inst, mat, atrs, sred)
@@ -296,12 +266,31 @@ Public Class Paleta
                 TABwymB = ArrayAdd(TABwymB, txtWymB.Text)
             End If
 
-
+            If atrVent(0) = "" Then
+                atrVent(0) = "-"
+            End If
+            If atrVent(1) = "" Then
+                atrVent(1) = "-"
+            End If
+            If atrVent(2) = "" Then
+                atrVent(2) = "-"
+            End If
 
 
             Dim atrsVent As String = Join(atrVent, "_")
             If sysname = "" Then
                 MsgBox("Nie podano nazwy systemu.")
+            End If
+
+
+            If wymA = "" Then
+                wymA = "-"
+            End If
+            If wymB = "" Then
+                wymB = "-"
+            End If
+            If sredVent = "" Then
+                sredVent = "-"
             End If
 
             If ListBoxWymB.Enabled = True Then
@@ -351,7 +340,7 @@ Public Class Paleta
             ListBoxFill(ListBoxWymB, TABwymB)
             txtWymA.Text = "Wymiar A [mm]"
             txtWymB.Text = "Wymiar B [mm]"
-        ElseIf rbtnSpiro.checked = True Or rbtnFlex.Checked = True Or rbtnAkustik.Checked = True Then
+        ElseIf rbtnSpiro.Checked = True Or rbtnFlex.Checked = True Or rbtnAkustik.Checked = True Then
             ListBoxFill(ListBoxWymA, TABsr)
             ListBoxWymB.Items.Clear()
         Else
@@ -366,13 +355,14 @@ Public Class Paleta
             rbtnSpiro.Checked = False
             rbtnFlex.Checked = False
             rbtnAkustik.Checked = False
+            RadioButton2.Checked = False
             ListBoxWymB.Enabled = True
             txtWymB.Enabled = True
             ListBoxFill(ListBoxWymA, TABwymA)
             ListBoxFill(ListBoxWymB, TABwymB)
             txtWymA.Text = "Wymiar A [mm]"
             txtWymB.Text = "Wymiar B [mm]"
-        ElseIf rbtnSpiro.checked = True Or rbtnFlex.Checked = True Or rbtnAkustik.Checked = True Then
+        ElseIf rbtnSpiro.Checked = True Or rbtnFlex.Checked = True Or rbtnAkustik.Checked = True Then
             ListBoxFill(ListBoxWymA, TABsr)
             ListBoxWymB.Items.Clear()
         Else
@@ -387,6 +377,7 @@ Public Class Paleta
             atrVent(0) = "spiro"
             rbtnProst.Checked = False
             rbtnPD.Checked = False
+            RadioButton2.Checked = False
             ListBoxWymB.Enabled = False
             txtWymB.Enabled = False
             wymB = ""
@@ -407,6 +398,7 @@ Public Class Paleta
             atrVent(0) = "flex"
             rbtnProst.Checked = False
             rbtnPD.Checked = False
+            RadioButton2.Checked = False
             ListBoxWymB.Enabled = False
             txtWymB.Enabled = False
             wymB = ""
@@ -444,27 +436,44 @@ Public Class Paleta
         End If
     End Sub
 
-    Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnPromat.CheckedChanged
+    Public Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnPromat.CheckedChanged
         If rbtnPromat.Checked = True Then
             atrVent(1) = "Promat"
+            old_atrVent = atrVent(1)
+
         Else
             atrVent(1) = ""
+            old_atrVent = atrVent(1)
         End If
     End Sub
 
-    Private Sub rbtnConlit_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnConlit.CheckedChanged
+    Public Sub rbtnConlit_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnConlit.CheckedChanged
         If rbtnConlit.Checked = True Then
             atrVent(1) = "Conlit"
+            old_atrVent = atrVent(1)
         Else
             atrVent(1) = ""
+            old_atrVent = atrVent(1)
         End If
     End Sub
 
-    Private Sub rbtnEIS120_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnEIS120.CheckedChanged
+    Public Sub rbtnEIS120_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnEIS120.CheckedChanged
         If rbtnEIS120.Checked = True Then
             atrVent(1) = "EIS120"
+            old_atrVent = atrVent(1)
         Else
             atrVent(1) = ""
+            old_atrVent = atrVent(1)
+        End If
+    End Sub
+
+    Public Sub RadioButton4_CheckedChanged_1(sender As Object, e As EventArgs) Handles RadioButton4.CheckedChanged
+        If RadioButton4.Checked = True Then
+            atrVent(1) = "Zewn"
+            old_atrVent = atrVent(1)
+        Else
+            atrVent(1) = ""
+            old_atrVent = atrVent(1)
         End If
     End Sub
 
@@ -545,7 +554,7 @@ Public Class Paleta
             RadioButton4.Enabled = True
             RadioButton3.Enabled = True
             CheckBox3.Enabled = True
-            TextBox1.Enabled = True
+            'TextBox1.Enabled = True
         Else
             atrVent(1) = ""
             rbtnConlit.Enabled = False
@@ -598,18 +607,16 @@ Public Class Paleta
 
     End Sub
 
-    Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles rInneChkBox.CheckedChanged
-        If rInneChkBox.Checked = True Then
-            rInne.Enabled = True
-            rInne.Text = "Inne"
-        Else
-            rInne.Enabled = False
-            rInne.Text = "Inne"
-        End If
-    End Sub
+
 
     Private Sub CheckBox3_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox3.CheckedChanged
+        If CheckBox3.Checked = True Then
+            TextBox1.Enabled = True
+        Else
+            TextBox1.Enabled = False
+            TextBox1.Text = "Inne"
 
+        End If
     End Sub
 
     Private Sub txtWymB_TextChanged(sender As Object, e As EventArgs) Handles txtWymB.TextChanged
@@ -640,33 +647,19 @@ Public Class Paleta
         End If
     End Sub
 
-    Private Sub rInne_TextChanged(sender As Object, e As EventArgs) Handles rInne.TextChanged
+    Private Sub rInne_TextChanged(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub rInne_Click(sender As Object, e As EventArgs) Handles rInne.Click
-        If rInne.Text = "Inne" Then
-            rInne.Clear()
-        End If
-    End Sub
 
     Private Sub chkBoxMaterial_CheckedChanged(sender As Object, e As EventArgs) Handles chkBoxMaterial.CheckedChanged
         If chkBoxMaterial.Checked = True Then
-            RBtnStal.Enabled = True
-            RBtnPP.Enabled = True
-            RBtnPVC.Enabled = True
-            RBtnStalNierdz.Enabled = True
-            RBtnHDPE.Enabled = True
-            RBtnZeliwo.Enabled = True
-
+            txtMat.Enabled = True
+            mat = txtMat.Text
         Else
+            txtMat.Enabled = False
             mat = ""
-            RBtnStal.Enabled = False
-            RBtnPP.Enabled = False
-            RBtnPVC.Enabled = False
-            RBtnStalNierdz.Enabled = False
-            RBtnHDPE.Enabled = False
-            RBtnZeliwo.Enabled = False
+
         End If
     End Sub
 
@@ -686,6 +679,84 @@ Public Class Paleta
 
     Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
 
+    End Sub
+
+    Private Sub MenuStrip1_ItemClicked(sender As Object, e As System.Windows.Forms.ToolStripItemClickedEventArgs)
+
+    End Sub
+
+    Private Sub czarny_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Public Shared ColorCode As String
+    Public Sub LineColor_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LineColor.SelectedIndexChanged
+        Dim color = LineColor.SelectedItem
+        'MsgBox("Wybrany kolor to: " & color)
+
+        Select Case color
+            Case "czarny"
+                ColorCode = "250"
+            Case "biały"
+                ColorCode = "7"
+            Case "czerwony"
+                ColorCode = "1"
+            Case "żółty"
+                ColorCode = "2"
+            Case "różowy"
+                ColorCode = "6"
+            Case Else
+                ColorCode = "4"
+        End Select
+    End Sub
+
+    Public Shared WeightCode As String
+    Public Sub LineWeight_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LineWeight.SelectedIndexChanged
+        Dim weight = LineWeight.SelectedItem
+
+        Select Case weight
+            Case "0,15"
+                WeightCode = "LineWeight015"
+            Case "0,25"
+                WeightCode = "LineWeight025"
+            Case "0,40"
+                WeightCode = "LineWeight040"
+            Case "0,60"
+                WeightCode = "LineWeight060"
+            Case "0,80"
+                WeightCode = "LineWeight080"
+            Case Else
+                WeightCode = "LineWeight050"
+        End Select
+    End Sub
+
+    Private Sub TextBox1_TextChanged_1(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+        'atrVent(1) = atrVent(1)
+        If TextBox1.Text = "" Or TextBox1.Text = "Inne" Then
+            atrVent(1) = old_atrVent
+        Else
+            If atrVent(1) = "" Then
+                atrVent(1) = TextBox1.Text
+            Else
+                atrVent(1) = old_atrVent + "+" + TextBox1.Text
+            End If
+        End If
+
+    End Sub
+
+    Private Sub TextBox1_Click(sender As Object, e As EventArgs) Handles TextBox1.Click
+        If TextBox1.Text = "Inne" Then
+            TextBox1.Clear()
+        End If
+
+    End Sub
+
+    Private Sub txtMat_TextChanged(sender As Object, e As EventArgs) Handles txtMat.TextChanged
+        If chkBoxMaterial.Checked = True Then
+            mat = txtMat.Text
+        Else
+            mat = ""
+        End If
     End Sub
 End Class
 

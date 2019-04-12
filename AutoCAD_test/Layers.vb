@@ -8,6 +8,7 @@ Public Class Layers
 
     <CommandMethod("CreateAndAssignALayer")>
     Public Shared Sub CreateAndAssignALayer(LayerName)
+
         '' Get the current document and database
         Dim acDoc As Document = Application.DocumentManager.MdiActiveDocument
         Dim acCurDb As Database = acDoc.Database
@@ -28,7 +29,9 @@ Public Class Layers
                     Dim acLyrTblRec As LayerTableRecord = New LayerTableRecord()
 
                     '' Assign the layer the ACI color 1 and a name
-                    acLyrTblRec.Color = Color.FromColorIndex(ColorMethod.ByAci, 1)
+                    acLyrTblRec.Color = Color.FromColorIndex(ColorMethod.ByAci, Paleta.ColorCode)
+                    Dim lineweightcode As String = "LineWeight." & Paleta.WeightCode
+                    acLyrTblRec.LineWeight = LineWeight.LineWeight040
                     acLyrTblRec.Name = sLayerName
 
                     '' Upgrade the Layer table for write

@@ -28,7 +28,7 @@ Public Class Lengths
                     acDoc.Editor.WriteMessage(vbLf & acLyrTblRec.Name)
 
                     'SelectEntitiesWithProperties()
-                    testTotalLengthVB(acLyrTblRec.Name)
+                    'testTotalLengthVB(acLyrTblRec.Name)
                 End If
 
             Next

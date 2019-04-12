@@ -23,8 +23,6 @@ Partial Class Paleta
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.GrpInst = New System.Windows.Forms.GroupBox()
-        Me.rInneChkBox = New System.Windows.Forms.CheckBox()
-        Me.rInne = New System.Windows.Forms.TextBox()
         Me.rInst = New System.Windows.Forms.TextBox()
         Me.ListBoxSred = New System.Windows.Forms.ListBox()
         Me.GrpInne = New System.Windows.Forms.GroupBox()
@@ -35,12 +33,6 @@ Partial Class Paleta
         Me.ChkBoxKabel = New System.Windows.Forms.CheckBox()
         Me.GrpMat = New System.Windows.Forms.GroupBox()
         Me.chkBoxMaterial = New System.Windows.Forms.CheckBox()
-        Me.RBtnStalNierdz = New System.Windows.Forms.RadioButton()
-        Me.RBtnHDPE = New System.Windows.Forms.RadioButton()
-        Me.RBtnPVC = New System.Windows.Forms.RadioButton()
-        Me.RBtnZeliwo = New System.Windows.Forms.RadioButton()
-        Me.RBtnPP = New System.Windows.Forms.RadioButton()
-        Me.RBtnStal = New System.Windows.Forms.RadioButton()
         Me.BtnDraw = New System.Windows.Forms.Button()
         Me.BtnCancel = New System.Windows.Forms.Button()
         Me.rbtnPD = New System.Windows.Forms.RadioButton()
@@ -76,9 +68,12 @@ Partial Class Paleta
         Me.rbtnFi = New System.Windows.Forms.RadioButton()
         Me.rbtnDN = New System.Windows.Forms.RadioButton()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.LineWeight = New System.Windows.Forms.ComboBox()
+        Me.LineColor = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.txtMat = New System.Windows.Forms.TextBox()
         Me.GrpInst.SuspendLayout()
         Me.GrpInne.SuspendLayout()
         Me.GrpMat.SuspendLayout()
@@ -94,8 +89,6 @@ Partial Class Paleta
         '
         'GrpInst
         '
-        Me.GrpInst.Controls.Add(Me.rInneChkBox)
-        Me.GrpInst.Controls.Add(Me.rInne)
         Me.GrpInst.Controls.Add(Me.rInst)
         Me.GrpInst.Location = New System.Drawing.Point(3, 6)
         Me.GrpInst.Name = "GrpInst"
@@ -104,38 +97,19 @@ Partial Class Paleta
         Me.GrpInst.TabStop = False
         Me.GrpInst.Text = "Instalacja: "
         '
-        'rInneChkBox
-        '
-        Me.rInneChkBox.AutoSize = True
-        Me.rInneChkBox.Location = New System.Drawing.Point(96, 23)
-        Me.rInneChkBox.Name = "rInneChkBox"
-        Me.rInneChkBox.Size = New System.Drawing.Size(15, 14)
-        Me.rInneChkBox.TabIndex = 21
-        Me.rInneChkBox.UseVisualStyleBackColor = True
-        '
-        'rInne
-        '
-        Me.rInne.Enabled = False
-        Me.rInne.Location = New System.Drawing.Point(115, 19)
-        Me.rInne.Name = "rInne"
-        Me.rInne.Size = New System.Drawing.Size(68, 20)
-        Me.rInne.TabIndex = 20
-        Me.rInne.Text = "Inne"
-        '
         'rInst
         '
         Me.rInst.Location = New System.Drawing.Point(7, 19)
         Me.rInst.Name = "rInst"
-        Me.rInst.Size = New System.Drawing.Size(84, 20)
+        Me.rInst.Size = New System.Drawing.Size(172, 20)
         Me.rInst.TabIndex = 4
-        Me.rInst.Text = "Nazwa instalacji"
         '
         'ListBoxSred
         '
         Me.ListBoxSred.FormattingEnabled = True
-        Me.ListBoxSred.Location = New System.Drawing.Point(101, 217)
+        Me.ListBoxSred.Location = New System.Drawing.Point(101, 185)
         Me.ListBoxSred.Name = "ListBoxSred"
-        Me.ListBoxSred.Size = New System.Drawing.Size(91, 95)
+        Me.ListBoxSred.Size = New System.Drawing.Size(91, 134)
         Me.ListBoxSred.TabIndex = 16
         '
         'GrpInne
@@ -145,7 +119,7 @@ Partial Class Paleta
         Me.GrpInne.Controls.Add(Me.ChkBoxZewn)
         Me.GrpInne.Controls.Add(Me.ChkBoxPlaszcz)
         Me.GrpInne.Controls.Add(Me.ChkBoxKabel)
-        Me.GrpInne.Location = New System.Drawing.Point(3, 138)
+        Me.GrpInne.Location = New System.Drawing.Point(3, 109)
         Me.GrpInne.Name = "GrpInne"
         Me.GrpInne.Size = New System.Drawing.Size(188, 69)
         Me.GrpInne.TabIndex = 15
@@ -202,16 +176,11 @@ Partial Class Paleta
         '
         'GrpMat
         '
+        Me.GrpMat.Controls.Add(Me.txtMat)
         Me.GrpMat.Controls.Add(Me.chkBoxMaterial)
-        Me.GrpMat.Controls.Add(Me.RBtnStalNierdz)
-        Me.GrpMat.Controls.Add(Me.RBtnHDPE)
-        Me.GrpMat.Controls.Add(Me.RBtnPVC)
-        Me.GrpMat.Controls.Add(Me.RBtnZeliwo)
-        Me.GrpMat.Controls.Add(Me.RBtnPP)
-        Me.GrpMat.Controls.Add(Me.RBtnStal)
         Me.GrpMat.Location = New System.Drawing.Point(3, 61)
         Me.GrpMat.Name = "GrpMat"
-        Me.GrpMat.Size = New System.Drawing.Size(189, 71)
+        Me.GrpMat.Size = New System.Drawing.Size(189, 48)
         Me.GrpMat.TabIndex = 14
         Me.GrpMat.TabStop = False
         Me.GrpMat.Text = "Materiał:"
@@ -219,83 +188,11 @@ Partial Class Paleta
         'chkBoxMaterial
         '
         Me.chkBoxMaterial.AutoSize = True
-        Me.chkBoxMaterial.Location = New System.Drawing.Point(48, 0)
+        Me.chkBoxMaterial.Location = New System.Drawing.Point(52, 0)
         Me.chkBoxMaterial.Name = "chkBoxMaterial"
         Me.chkBoxMaterial.Size = New System.Drawing.Size(15, 14)
         Me.chkBoxMaterial.TabIndex = 17
         Me.chkBoxMaterial.UseVisualStyleBackColor = True
-        '
-        'RBtnStalNierdz
-        '
-        Me.RBtnStalNierdz.AutoSize = True
-        Me.RBtnStalNierdz.Enabled = False
-        Me.RBtnStalNierdz.Location = New System.Drawing.Point(116, 20)
-        Me.RBtnStalNierdz.Name = "RBtnStalNierdz"
-        Me.RBtnStalNierdz.Size = New System.Drawing.Size(77, 17)
-        Me.RBtnStalNierdz.TabIndex = 5
-        Me.RBtnStalNierdz.TabStop = True
-        Me.RBtnStalNierdz.Text = "Stal nierdz."
-        Me.RBtnStalNierdz.UseVisualStyleBackColor = True
-        '
-        'RBtnHDPE
-        '
-        Me.RBtnHDPE.AutoSize = True
-        Me.RBtnHDPE.Enabled = False
-        Me.RBtnHDPE.Location = New System.Drawing.Point(116, 44)
-        Me.RBtnHDPE.Name = "RBtnHDPE"
-        Me.RBtnHDPE.Size = New System.Drawing.Size(55, 17)
-        Me.RBtnHDPE.TabIndex = 4
-        Me.RBtnHDPE.TabStop = True
-        Me.RBtnHDPE.Text = "HDPE"
-        Me.RBtnHDPE.UseVisualStyleBackColor = True
-        '
-        'RBtnPVC
-        '
-        Me.RBtnPVC.AutoSize = True
-        Me.RBtnPVC.Enabled = False
-        Me.RBtnPVC.Location = New System.Drawing.Point(64, 44)
-        Me.RBtnPVC.Name = "RBtnPVC"
-        Me.RBtnPVC.Size = New System.Drawing.Size(46, 17)
-        Me.RBtnPVC.TabIndex = 3
-        Me.RBtnPVC.TabStop = True
-        Me.RBtnPVC.Text = "PVC"
-        Me.RBtnPVC.UseVisualStyleBackColor = True
-        '
-        'RBtnZeliwo
-        '
-        Me.RBtnZeliwo.AutoSize = True
-        Me.RBtnZeliwo.Enabled = False
-        Me.RBtnZeliwo.Location = New System.Drawing.Point(7, 44)
-        Me.RBtnZeliwo.Name = "RBtnZeliwo"
-        Me.RBtnZeliwo.Size = New System.Drawing.Size(56, 17)
-        Me.RBtnZeliwo.TabIndex = 2
-        Me.RBtnZeliwo.TabStop = True
-        Me.RBtnZeliwo.Text = "Żeliwo"
-        Me.RBtnZeliwo.UseVisualStyleBackColor = True
-        '
-        'RBtnPP
-        '
-        Me.RBtnPP.AutoSize = True
-        Me.RBtnPP.Enabled = False
-        Me.RBtnPP.Location = New System.Drawing.Point(64, 20)
-        Me.RBtnPP.Name = "RBtnPP"
-        Me.RBtnPP.Size = New System.Drawing.Size(39, 17)
-        Me.RBtnPP.TabIndex = 1
-        Me.RBtnPP.TabStop = True
-        Me.RBtnPP.Text = "PP"
-        Me.RBtnPP.UseVisualStyleBackColor = True
-        '
-        'RBtnStal
-        '
-        Me.RBtnStal.AutoSize = True
-        Me.RBtnStal.Enabled = False
-        Me.RBtnStal.Location = New System.Drawing.Point(7, 20)
-        Me.RBtnStal.Name = "RBtnStal"
-        Me.RBtnStal.Size = New System.Drawing.Size(43, 17)
-        Me.RBtnStal.TabIndex = 0
-        Me.RBtnStal.TabStop = True
-        Me.RBtnStal.Text = "Stal"
-        Me.RBtnStal.UseVisualStyleBackColor = True
         '
         'BtnDraw
         '
@@ -626,7 +523,7 @@ Partial Class Paleta
         '
         'txtInnaSred
         '
-        Me.txtInnaSred.Location = New System.Drawing.Point(101, 318)
+        Me.txtInnaSred.Location = New System.Drawing.Point(101, 321)
         Me.txtInnaSred.Name = "txtInnaSred"
         Me.txtInnaSred.Size = New System.Drawing.Size(93, 20)
         Me.txtInnaSred.TabIndex = 22
@@ -636,7 +533,7 @@ Partial Class Paleta
         '
         Me.GroupBox4.Controls.Add(Me.rbtnFi)
         Me.GroupBox4.Controls.Add(Me.rbtnDN)
-        Me.GroupBox4.Location = New System.Drawing.Point(3, 213)
+        Me.GroupBox4.Location = New System.Drawing.Point(3, 184)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(93, 61)
         Me.GroupBox4.TabIndex = 16
@@ -667,6 +564,8 @@ Partial Class Paleta
         '
         'TabPage3
         '
+        Me.TabPage3.Controls.Add(Me.LineWeight)
+        Me.TabPage3.Controls.Add(Me.LineColor)
         Me.TabPage3.Controls.Add(Me.Label1)
         Me.TabPage3.Controls.Add(Me.Button2)
         Me.TabPage3.Controls.Add(Me.Button1)
@@ -676,6 +575,27 @@ Partial Class Paleta
         Me.TabPage3.TabIndex = 0
         Me.TabPage3.Text = "Obliczenia"
         Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'LineWeight
+        '
+        Me.LineWeight.FormattingEnabled = True
+        Me.LineWeight.Items.AddRange(New Object() {"0,15", "0,25", "0,40", "0,60", "0,80"})
+        Me.LineWeight.Location = New System.Drawing.Point(13, 90)
+        Me.LineWeight.Name = "LineWeight"
+        Me.LineWeight.Size = New System.Drawing.Size(121, 21)
+        Me.LineWeight.TabIndex = 19
+        Me.LineWeight.Text = "Grubość linii"
+        '
+        'LineColor
+        '
+        Me.LineColor.ForeColor = System.Drawing.SystemColors.WindowText
+        Me.LineColor.FormattingEnabled = True
+        Me.LineColor.Items.AddRange(New Object() {"czarny", "biały", "czerwony", "żółty", "różowy"})
+        Me.LineColor.Location = New System.Drawing.Point(13, 63)
+        Me.LineColor.Name = "LineColor"
+        Me.LineColor.Size = New System.Drawing.Size(121, 21)
+        Me.LineColor.TabIndex = 18
+        Me.LineColor.Text = "Kolor linii"
         '
         'Label1
         '
@@ -703,6 +623,14 @@ Partial Class Paleta
         Me.Button1.TabIndex = 15
         Me.Button1.Text = "Eksportuj"
         Me.Button1.UseVisualStyleBackColor = True
+        '
+        'txtMat
+        '
+        Me.txtMat.Enabled = False
+        Me.txtMat.Location = New System.Drawing.Point(7, 19)
+        Me.txtMat.Name = "txtMat"
+        Me.txtMat.Size = New System.Drawing.Size(172, 20)
+        Me.txtMat.TabIndex = 22
         '
         'Paleta
         '
@@ -743,15 +671,9 @@ Partial Class Paleta
     Friend WithEvents rbtnFlex As System.Windows.Forms.RadioButton
     Friend WithEvents rbtnProst As System.Windows.Forms.RadioButton
     Friend WithEvents GrpMat As System.Windows.Forms.GroupBox
-    Friend WithEvents RBtnHDPE As System.Windows.Forms.RadioButton
-    Friend WithEvents RBtnPVC As System.Windows.Forms.RadioButton
-    Friend WithEvents RBtnZeliwo As System.Windows.Forms.RadioButton
-    Friend WithEvents RBtnPP As System.Windows.Forms.RadioButton
-    Friend WithEvents RBtnStal As System.Windows.Forms.RadioButton
     Friend WithEvents GrpInne As System.Windows.Forms.GroupBox
     Friend WithEvents BtnDraw As System.Windows.Forms.Button
     Friend WithEvents BtnCancel As System.Windows.Forms.Button
-    Friend WithEvents RBtnStalNierdz As System.Windows.Forms.RadioButton
     Friend WithEvents TxtBoxInne As System.Windows.Forms.TextBox
     Friend WithEvents ChkBoxPlaszcz As System.Windows.Forms.CheckBox
     Friend WithEvents ChkBoxKabel As System.Windows.Forms.CheckBox
@@ -777,8 +699,6 @@ Partial Class Paleta
     Friend WithEvents rbtnAkustik As System.Windows.Forms.RadioButton
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents chkBoxPPoz As System.Windows.Forms.CheckBox
-    Friend WithEvents rInneChkBox As System.Windows.Forms.CheckBox
-    Friend WithEvents rInne As System.Windows.Forms.TextBox
     Friend WithEvents txtInnaSred As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Friend WithEvents rbtnFi As System.Windows.Forms.RadioButton
@@ -793,4 +713,7 @@ Partial Class Paleta
     Friend WithEvents RadioButton3 As System.Windows.Forms.RadioButton
     Friend WithEvents chkBoxMaterial As System.Windows.Forms.CheckBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents LineColor As System.Windows.Forms.ComboBox
+    Friend WithEvents LineWeight As System.Windows.Forms.ComboBox
+    Friend WithEvents txtMat As System.Windows.Forms.TextBox
 End Class
