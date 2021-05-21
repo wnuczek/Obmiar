@@ -44,37 +44,37 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AcCoreMgd">
-      <HintPath>..\..\..\..\..\..\Autodesk\ObjectARX2016\inc\AcCoreMgd.dll</HintPath>
+      <HintPath>..\..\..\ObjectARX 2016\inc\AcCoreMgd.dll</HintPath>
     </Reference>
     <Reference Include="AcCui">
-      <HintPath>..\..\..\..\..\..\Autodesk\ObjectARX2016\inc\AcCui.dll</HintPath>
+      <HintPath>..\..\..\ObjectARX 2016\inc\AcCui.dll</HintPath>
     </Reference>
     <Reference Include="AcDbMgd">
-      <HintPath>..\..\..\..\..\..\Autodesk\ObjectARX2016\inc\AcDbMgd.dll</HintPath>
+      <HintPath>..\..\..\ObjectARX 2016\inc\AcDbMgd.dll</HintPath>
     </Reference>
     <Reference Include="acdbmgdbrep">
-      <HintPath>..\..\..\..\..\..\Autodesk\ObjectARX2016\inc\acdbmgdbrep.dll</HintPath>
+      <HintPath>..\..\..\ObjectARX 2016\inc\acdbmgdbrep.dll</HintPath>
     </Reference>
     <Reference Include="AcDx">
-      <HintPath>..\..\..\..\..\..\Autodesk\ObjectARX2016\inc\AcDx.dll</HintPath>
+      <HintPath>..\..\..\ObjectARX 2016\inc\AcDx.dll</HintPath>
     </Reference>
     <Reference Include="AcMgd">
-      <HintPath>..\..\..\..\..\..\Autodesk\ObjectARX2016\inc\AcMgd.dll</HintPath>
+      <HintPath>..\..\..\ObjectARX 2016\inc\AcMgd.dll</HintPath>
     </Reference>
     <Reference Include="AcMr">
-      <HintPath>..\..\..\..\..\..\Autodesk\ObjectARX2016\inc\AcMr.dll</HintPath>
+      <HintPath>..\..\..\ObjectARX 2016\inc\AcMr.dll</HintPath>
     </Reference>
     <Reference Include="AcTcMgd">
-      <HintPath>..\..\..\..\..\..\Autodesk\ObjectARX2016\inc\AcTcMgd.dll</HintPath>
+      <HintPath>..\..\..\ObjectARX 2016\inc\AcTcMgd.dll</HintPath>
     </Reference>
     <Reference Include="AcWindows">
-      <HintPath>..\..\..\..\..\..\Autodesk\ObjectARX2016\inc\AcWindows.dll</HintPath>
+      <HintPath>..\..\..\ObjectARX 2016\inc\AcWindows.dll</HintPath>
     </Reference>
     <Reference Include="AdUiPalettes">
       <HintPath>..\..\..\..\..\..\Autodesk\ObjectARX2016\inc-x64\AdUiPalettes.dll</HintPath>
     </Reference>
     <Reference Include="AdWindows">
-      <HintPath>..\..\..\..\..\..\Autodesk\ObjectARX2016\inc\AdWindows.dll</HintPath>
+      <HintPath>..\..\..\ObjectARX 2016\inc\AdWindows.dll</HintPath>
     </Reference>
     <Reference Include="Autodesk.AutoCAD.Interop, Version=18.2.0.0, Culture=neutral, PublicKeyToken=eed84259d7cbf30b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

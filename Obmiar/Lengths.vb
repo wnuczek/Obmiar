@@ -6,6 +6,8 @@ Imports Autodesk.AutoCAD.Colors
 Imports Autodesk.AutoCAD.EditorInput
 Imports System.Linq
 Imports System.Text
+Imports System.IO
+Imports sw = System.Windows
 
 Public Class Lengths
 
@@ -108,7 +110,7 @@ Public Class Lengths
     Public Sub testTotalLengthVB()
         Dim db As Database = HostApplicationServices.WorkingDatabase
         Dim ed As Editor = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Editor
-        Dim sb As New StringBuilder
+        Dim sb, csv As New StringBuilder
         sb.AppendLine(vbTab + "Total Length:" + vbTab + "------------------------------------")
         Using tr As Transaction = db.TransactionManager.StartTransaction
             Dim tv() As TypedValue = {New TypedValue(0, "LINE,ARC,SPLINE,CIRCLE,ELLIPSE,*POLYLINE")}
@@ -117,19 +119,52 @@ Public Class Lengths
             If psr.Status <> PromptStatus.OK Then Return
 
             ''  See here for more: http://msdn.microsoft.com/en-us/vstudio/bb688088.aspx        101 LINQ Samples VB.NET
-            ''  Grouping objects by name with sum of lengths
+            ''  Groue
             Dim subtotals = From id In psr.Value.GetObjectIds
-                            Let curve = CType(tr.GetObject(id, OpenMode.ForRead), Curve)
-                            Group curve By curve.GetRXClass().DxfName Into grp = Group
-                            Select ObjectName = grp.First, Subtotal = grp.Sum(Function(x) Math.Abs(x.GetDistanceAtParameter(x.EndParam - x.StartParam)))
+                            Let curve = CType(tr.GetObject(id, OpenMode.ForRead), Curve), layer = curve.Layer
+                            Group curve By layer Into grp = Group
+                            Select ObjectName = grp.First, LayerName = layer, Subtotal = grp.Sum(Function(x) Math.Abs(x.GetDistanceAtParameter(x.EndParam - x.StartParam)))
+
+            csv.AppendLine(String.Format("Layer, Total length"))
 
             For Each n In subtotals
-                sb.AppendLine(String.Format("{0}" + vbTab + "{1:f6}", n.ObjectName, n.Subtotal))
+                csv.AppendLine(String.Format("{0},{1:f6}", n.LayerName, n.Subtotal))
+                sb.AppendLine(String.Format("{0}" + vbTab + "{1:f6}", n.LayerName, n.Subtotal))
             Next
 
             System.Windows.Forms.MessageBox.Show(sb.ToString())
+
+            ExportToCSVFile(csv)
+
         End Using
     End Sub
+
+    '<CommandMethod("CSVExport")>
+    Public Sub ExportToCSVFile(data)
+        Dim acDoc = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument
+        Dim acDb = acDoc.Database
+        Dim ed = acDoc.Editor
+        Dim filter = New SelectionFilter({New TypedValue(-4, "OR"), New TypedValue(0, "ARC,CIRCLE,ELLIPSE,LINE,LWPOLYLINE,SPLINE"), New TypedValue(-4, "AND"), New TypedValue(0, "POLYLINE"), New TypedValue(-4, "NOT"), New TypedValue(-4, "&"), New TypedValue(70, 112), New TypedValue(-4, "NOT>"), New TypedValue(-4, "AND>"), New TypedValue(-4, "OR>")})
+        Dim selection As PromptSelectionResult = ed.GetSelection(filter)
+        If selection.Status = PromptStatus.OK Then Return
+        Dim sfd = New sw.Forms.SaveFileDialog()
+        sfd.Filter = "*.csv Files|*.csv"
+
+        sfd.ShowDialog()
+
+        Dim file As System.IO.StreamWriter
+        file = My.Computer.FileSystem.OpenTextFileWriter(sfd.FileName, False)
+        file.WriteLine(data)
+        file.Close()
+
+    End Sub
+
+    Private Shared Function GetWriterForFile(ByVal filename As String) As StreamWriter
+        Dim sWriter As StreamWriter
+        Dim fs As FileStream = File.Open(filename, FileMode.CreateNew, FileAccess.Write)
+        sWriter = New StreamWriter(fs, System.Text.Encoding.UTF8)
+        Return sWriter
+    End Function
 
 End Class
 
