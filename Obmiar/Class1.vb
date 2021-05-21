@@ -1,7 +1,6 @@
 ﻿Imports Autodesk.AutoCAD.Runtime
 Imports Autodesk.AutoCAD.ApplicationServices
 Imports Autodesk.AutoCAD.Interop
-Imports Autodesk.AutoCAD.Interop.Common
 Imports MgdAcApplication = Autodesk.AutoCAD.ApplicationServices.Application
 Imports Autodesk.AutoCAD.DatabaseServices
 Imports ObmiarPW.Layers
@@ -95,11 +94,11 @@ Public Class Class1
         'check to see if paletteset is already created 
         If m_ps Is Nothing Then
             'no so create it 
-            m_ps = New Autodesk.AutoCAD.Windows.PaletteSet("Narzędzia obmiarowe (© 2016-2019 Paweł Wnuk)", New Guid("{CCBFEC73-9FE4-4aa2-8E4B-3068E94A2BFC}"))
+            m_ps = New Autodesk.AutoCAD.Windows.PaletteSet("Narzędzia obmiarowe (© 2016-2021 Paweł Wnuk)", New Guid("{CCBFEC73-9FE4-4aa2-8E4B-3068E94A2BFF}"))
             'create new instance of user control 
             Dim myPalette As Paleta = New Paleta()
             'add it to the paletteset 
-            m_ps.Add("Narzędzia obmiarowe (© 2016-2019 Paweł Wnuk)", myPalette)
+            m_ps.Add("Narzędzia obmiarowe (© 2016-2021 Paweł Wnuk)", myPalette)
         End If
         'turn it on 
 
@@ -116,12 +115,12 @@ Public Class Class1
     Private Shared Sub Paleta_Load(ByVal sender As Object, ByVal e As Autodesk.AutoCAD.Windows.PalettePersistEventArgs)
         'demo loading user data
         Dim a As Double =
-    CType(e.ConfigurationSection.ReadProperty("Narzędzia obmiarowe (© 2016-2019 Paweł Wnuk)", 22.3), Double)
+    CType(e.ConfigurationSection.ReadProperty("Narzędzia obmiarowe (© 2016-2021 Paweł Wnuk)", 22.3), Double)
     End Sub
 
     Private Shared Sub ps_Save(ByVal sender As Object, ByVal e As Autodesk.AutoCAD.Windows.PalettePersistEventArgs)
         'demo saving user data 
-        e.ConfigurationSection.WriteProperty("Narzędzia obmiarowe (© 2016-2019 Paweł Wnuk)", 32.3)
+        e.ConfigurationSection.WriteProperty("Narzędzia obmiarowe (© 2016-2021 Paweł Wnuk)", 32.3)
     End Sub
 
     Public Sub Initialize() Implements IExtensionApplication.Initialize

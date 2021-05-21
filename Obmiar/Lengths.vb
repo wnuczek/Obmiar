@@ -113,7 +113,10 @@ Public Class Lengths
         Dim sb, csv As New StringBuilder
         sb.AppendLine(vbTab + "Total Length:" + vbTab + "------------------------------------")
         Using tr As Transaction = db.TransactionManager.StartTransaction
-            Dim tv() As TypedValue = {New TypedValue(0, "LINE,ARC,SPLINE,CIRCLE,ELLIPSE,*POLYLINE")}
+            Dim tv() As TypedValue = {
+                New TypedValue(0, "LINE,ARC,SPLINE,CIRCLE,ELLIPSE,*POLYLINE"),
+                New TypedValue(8, ".OBMR_*")
+            }
             Dim sf As New SelectionFilter(tv)
             Dim psr As PromptSelectionResult = ed.GetSelection(sf)
             If psr.Status <> PromptStatus.OK Then Return
@@ -125,14 +128,14 @@ Public Class Lengths
                             Group curve By layer Into grp = Group
                             Select ObjectName = grp.First, LayerName = layer, Subtotal = grp.Sum(Function(x) Math.Abs(x.GetDistanceAtParameter(x.EndParam - x.StartParam)))
 
-            csv.AppendLine(String.Format("Layer, Total length"))
+            'csv.AppendLine(String.Format("Layer; Total length"))
 
             For Each n In subtotals
-                csv.AppendLine(String.Format("{0},{1:f6}", n.LayerName, n.Subtotal))
+                csv.AppendLine(String.Format("{0};{1:f6}", n.LayerName.Replace("_", ";"), n.Subtotal))
                 sb.AppendLine(String.Format("{0}" + vbTab + "{1:f6}", n.LayerName, n.Subtotal))
             Next
 
-            System.Windows.Forms.MessageBox.Show(sb.ToString())
+            'System.Windows.Forms.MessageBox.Show(sb.ToString())
 
             ExportToCSVFile(csv)
 

@@ -78,7 +78,7 @@ Public Class Paleta
     Dim instHC() As String = {"CO", "CT", "CT AHU", "WL", "WL AHU"}
 
     Private Sub Paleta_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        MsgBox("Narzędzie obmiarowe - © 2016-2019 Paweł Wnuk" & vbNewLine & "(pawelwnuk.pl, mail@pawelwnuk.pl)")
+        MsgBox("Narzędzie obmiarowe - © 2016-2021 Paweł Wnuk" & vbNewLine & "(pawelwnuk.pl, mail@pawelwnuk.pl)")
     End Sub
 
     'WYPEŁNIANIE LISTY Z PLIKU TXT///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -675,8 +675,8 @@ Public Class Paleta
     End Sub
 
     Private Sub Button1_Click_2(sender As Object, e As EventArgs) Handles Button1.Click
-        ThisDrawing.SendCommand("LOS" & vbCr)
-        ThisDrawing.SendCommand("ADDLEN" & vbCr)
+        Dim len As Lengths = New Lengths()
+        len.testTotalLengthVB()
     End Sub
 
     Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
